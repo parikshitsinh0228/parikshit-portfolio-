@@ -1,0 +1,59 @@
+======================================================================
+AI & FULL STACK ENGINEER RESUME
+======================================================================
+Email: ai.engineer@example.com | Phone: +1 (234) 567-890
+Location: San Francisco, CA | Website: portfolio.example.com
+GitHub: github.com/example | LinkedIn: linkedin.com/in/example
+----------------------------------------------------------------------
+
+PROFESSIONAL SUMMARY
+--------------------
+Innovative Full Stack & AI Engineer focused on local model inference pipelines,
+privacy-compliant retrieval-augmented generation (RAG) platforms, and direct WebRTC
+browser sharing frameworks. Committed to edge computing efficiency.
+
+TECHNICAL SKILLS
+----------------
+- Programming Languages: Python, PHP, SQL, R, HTML, CSS, JavaScript, TypeScript, Dart
+- Frameworks & Libraries: React, Next.js, Flutter, FastAPI, Laravel, LangChain
+- Databases & Vector Stores: MySQL, Supabase, ChromaDB
+- Dev Tools & Platforms: Git, VS Code, Android Studio, AWS, Railway, Netlify, Jupyter
+
+PROJECTS PORTFOLIO
+------------------
+1. Local RAG Knowledge Assistant
+   - Tech Stack: FastAPI, LangChain, ChromaDB, Ollama, Llama 3, PyMuPDF, Python
+   - Description: Self-hosted document Q&A assistant indexing and parsing local files
+     with zero external API dependency. Built precise document page citation systems.
+
+2. TransferX Realtime File Sharing
+   - Tech Stack: React, WebRTC, Supabase Channels, Tailwind CSS, Netlify
+   - Description: Direct peer-to-peer browser-based data streaming bypassing intermediate
+     cloud servers. Incorporates presence sync & memory buffering control.
+
+3. Career Compass AI Recommendation
+   - Tech Stack: Flutter, PHP, Laravel, Railway, MySQL, Scikit-Learn
+   - Description: Mobile profile questionnaire classifier identifying structured career
+     paths using trained Random Forest algorithms.
+
+EXPERIENCE & MILESTONES
+-----------------------
+- AI Research & Development Intern | Center for Advanced AI
+  - Formulated local LangChain and ChromaDB workflows.
+  - Optimized quantized model memory utilization.
+- 1st Place National Hackathon Winner | Smart City Hack
+  - Built reinforced truck routing optimization saving 18% fuel cost.
+- Open Source Contributor | LangChain Ecosystem
+  - Contributed loader adjustments and custom auto-mapping connectors.
+
+EDUCATION
+---------
+- Bachelor of Technology in Computer Science (Specialization: AI & ML)
+  - State Technical University | CGPA: 9.2/10.0 | Graduation: 2022 - 2026
+
+CERTIFICATIONS
+--------------
+- AWS Certified Cloud Practitioner (Credential ID: AWS-CCP-874291)
+- Kaggle Advanced SQL (Credential ID: KAG-SQL-540192)
+- Cisco Python Essentials Professional (Credential ID: CSCO-PY-332910)
+======================================================================

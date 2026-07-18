@@ -1,0 +1,16 @@
+{
+  "name": "Senior AI Engineer Portfolio",
+  "short_name": "AIEngineer",
+  "description": "Specializing in secure local edge AI models, offline RAG systems, realtime WebRTC data channels, and premium React interfaces.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020205",
+  "theme_color": "#020205",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

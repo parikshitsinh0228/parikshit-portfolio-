@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+/* =============================================
+   DESIGN TOKENS
+   Warm off-white, typography-first, minimal
+   Inspired by: norell, ompatell.me, jayprojects.in
+   ============================================= */
+
+:root {
+  /* Core palette */
+  --bg:         #F5F4F1;
+  --bg-muted:   #EFEDE9;
+  --bg-raised:  #EAE8E4;
+  --border:     rgba(30, 28, 25, 0.10);
+  --border-md:  rgba(30, 28, 25, 0.18);
+
+  /* Foreground */
+  --ink:        #1A1917;
+  --ink-2:      #3D3B37;
+  --ink-3:      #6B6860;
+  --ink-4:      #9B9790;
+
+  /* Accent — restrained warm brown/black */
+  --accent:     #1A1917;
+  --accent-2:   #4A4643;
+
+  /* Typography */
+  --font-serif:  'Editorial New', Georgia, serif;
+  --font-sans:   'Geist', system-ui, sans-serif;
+  --font-mono:   'Geist Mono', 'SF Mono', monospace;
+
+  /* Spacing scale */
+  --section-py: 120px;
+  --max-w:      1180px;
+
+  /* Animation timing */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-md);
+  border-radius: 3px;
+}
+
+/* =============================================
+   TYPOGRAPHY SYSTEM
+   ============================================= */
+
+.font-serif  { font-family: var(--font-serif); }
+.font-sans   { font-family: var(--font-sans); }
+.font-mono   { font-family: var(--font-mono); }
+
+/* Giant editorial display */
+.display-xl {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.display-lg {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+.display-md {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.heading-sm {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.body-lg {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+.body-sm {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+
+/* =============================================
+   LAYOUT HELPERS
+   ============================================= */
+
+.section-wrap {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+  .section-wrap {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+.section-py {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* =============================================
+   CARD / SURFACE
+   ============================================= */
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: border-color 0.25s var(--ease-out), 
+              background 0.25s var(--ease-out),
+              transform 0.3s var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+
+.card-outlined {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.25s var(--ease-out),
+              background 0.25s var(--ease-out);
+}
+
+.card-outlined:hover {
+  border-color: var(--border-md);
+  background: var(--bg-raised);
+}
+
+/* =============================================
+   BUTTON SYSTEM
+   ============================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--ink-2);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-md);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-raised);
+  border-color: var(--ink);
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* =============================================
+   OVERSIZED BACKGROUND WORD
+   ============================================= */
+
+.bg-word {
+  position: absolute;
+  font-family: var(--font-serif);
+  font-size: clamp(6rem, 22vw, 22rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(30, 28, 25, 0.055);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* =============================================
+   SCROLL PROGRESS
+   ============================================= */
+
+.scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--ink);
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* =============================================
+   DIAGRAM (abstract SVG-style) 
+   ============================================= */
+
+.diagram-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border: 1px solid var(--border-md);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  background: var(--bg);
+  white-space: nowrap;
+}
+
+.diagram-arrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-4);
+  margin: 0 6px;
+}
+
+/* =============================================
+   LENIS SMOOTH SCROLL
+   ============================================= */
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overflow: clip; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+/* =============================================
+   SELECTION
+   ============================================= */
+
+::selection {
+  background: rgba(30, 28, 25, 0.12);
+  color: var(--ink);
+}
+
+/* =============================================
+   TIMELINE
+   ============================================= */
+
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border-md);
+}
+
+/* =============================================
+   NAV
+   ============================================= */
+
+.nav-pill {
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  transition: all 0.2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.nav-pill:hover {
+  color: var(--ink);
+  background: var(--bg-raised);
+}
+
+.nav-pill.active {
+  color: var(--ink);
+  background: var(--bg-raised);
+}
+
+/* =============================================
+   LOADING SCREEN
+   ============================================= */
+
+.loader-bg {
+  background: var(--bg);
+}
