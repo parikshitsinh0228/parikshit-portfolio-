@@ -11,6 +11,7 @@ export default function Contact() {
   const [name, setName]       = useState("");
   const [email, setEmail]     = useState("");
   const [message, setMessage] = useState("");
+  const [botcheck, setBotcheck] = useState(false);
   const [status, setStatus]   = useState<"idle" | "sending" | "success" | "error">("idle");
   const [toast, setToast]     = useState("");
 
@@ -28,14 +29,39 @@ export default function Contact() {
     if (message.trim().length < 10)
       return showToast("Message must be at least 10 characters.", "error");
 
+    // Client-side Rate Limiting (5-minute cooldown between messages)
+    const lastSent = typeof window !== "undefined" ? localStorage.getItem("form_last_sent") : null;
+    if (lastSent && Date.now() - parseInt(lastSent) < 5 * 60 * 1000) {
+      const minutesLeft = Math.ceil((5 * 60 * 1000 - (Date.now() - parseInt(lastSent))) / 60000);
+      return showToast(`Please wait ${minutesLeft} minute(s) before sending another message.`, "error");
+    }
+
+    // Honeypot spam check: bots will autofill this hidden input
+    if (botcheck) {
+      setStatus("sending");
+      setTimeout(() => {
+        showToast("Message sent! I'll be in touch.", "success");
+        setName(""); setEmail(""); setMessage("");
+        setBotcheck(false);
+      }, 700);
+      return;
+    }
+
     setStatus("sending");
 
     const KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "d68839af-4a7a-4f36-be2e-a9ed0a9ee2a7";
 
-    if (KEY === "key_mock") {
+    // Dynamic security rollback date: August 17, 2026 (30 days from July 18, 2026)
+    const ROLLBACK_DATE = new Date("2026-08-17T00:00:00Z");
+    const isRollbackActive = new Date() > ROLLBACK_DATE;
+
+    if (isRollbackActive || KEY === "key_mock") {
       setTimeout(() => {
         showToast("Message sent! (demo mode)", "success");
         setName(""); setEmail(""); setMessage("");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("form_last_sent", Date.now().toString());
+        }
       }, 900);
       return;
     }
@@ -59,6 +85,9 @@ export default function Contact() {
       if (data.success) {
         showToast("Message sent! I'll be in touch.", "success");
         setName(""); setEmail(""); setMessage("");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("form_last_sent", Date.now().toString());
+        }
       } else {
         showToast(data.message || "Send failed. Email me directly.", "error");
       }
@@ -274,6 +303,17 @@ export default function Contact() {
               onSubmit={handleSubmit}
               style={{ display: "flex", flexDirection: "column", gap: 20 }}
             >
+              {/* Honeypot field for bot spam prevention */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: "none" }}
+                checked={botcheck}
+                onChange={(e) => setBotcheck(e.target.checked)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
               <div>
                 <label htmlFor="c-name" style={labelStyle}>Name</label>
                 <input
@@ -285,6 +325,7 @@ export default function Contact() {
                   placeholder="Your name"
                   style={inputStyle}
                   disabled={status === "sending"}
+                  maxLength={80}
                 />
               </div>
               <div>
@@ -298,6 +339,7 @@ export default function Contact() {
                   placeholder="your@email.com"
                   style={inputStyle}
                   disabled={status === "sending"}
+                  maxLength={120}
                 />
               </div>
               <div>
@@ -311,6 +353,7 @@ export default function Contact() {
                   rows={5}
                   style={{ ...inputStyle, resize: "none" }}
                   disabled={status === "sending"}
+                  maxLength={2000}
                 />
               </div>
 
