@@ -2,7 +2,6 @@
 
 import { useRef, useState, FormEvent } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -31,11 +30,9 @@ export default function Contact() {
 
     setStatus("sending");
 
-    const SVC = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  || "service_mock";
-    const TPL = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_mock";
-    const KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  || "key_mock";
+    const KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "d68839af-4a7a-4f36-be2e-a9ed0a9ee2a7";
 
-    if (SVC === "service_mock") {
+    if (KEY === "key_mock") {
       setTimeout(() => {
         showToast("Message sent! (demo mode)", "success");
         setName(""); setEmail(""); setMessage("");
@@ -44,10 +41,26 @@ export default function Contact() {
     }
 
     try {
-      if (formRef.current) {
-        await emailjs.sendForm(SVC, TPL, formRef.current, KEY);
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: KEY,
+          name,
+          email,
+          message,
+          subject: `New Portfolio Message from ${name}`
+        })
+      });
+      const data = await response.json();
+      if (data.success) {
         showToast("Message sent! I'll be in touch.", "success");
         setName(""); setEmail(""); setMessage("");
+      } else {
+        showToast(data.message || "Send failed. Email me directly.", "error");
       }
     } catch {
       showToast("Send failed. Email me directly.", "error");

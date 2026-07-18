@@ -99,13 +99,13 @@ export default function Navbar() {
         </nav>
 
         {/* CTA */}
-        <a
-          href="mailto:champavatparikshit@gmail.com"
+        <button
+          onClick={() => scrollTo("contact")}
           className="btn btn-primary hidden-mobile"
           style={{ padding: "8px 18px", fontSize: "0.8125rem" }}
         >
           Hire me
-        </a>
+        </button>
 
         {/* Mobile hamburger */}
         <button
@@ -190,13 +190,13 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
-          <a
-            href="mailto:champavatparikshit@gmail.com"
+          <button
+            onClick={() => scrollTo("contact")}
             className="btn btn-primary"
             style={{ marginTop: 16, width: "100%", justifyContent: "center" }}
           >
             Hire me
-          </a>
+          </button>
         </div>
       )}
 
