@@ -67,7 +67,7 @@ export default function Hero() {
 
             {/* Giant headline */}
             <motion.h1
-              className="display-xl"
+              className="hero-title"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
