@@ -94,7 +94,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     company: "Gujarat Secondary and Higher Secondary Education Board",
     period: "Completed 2022",
     description: [
-      "Finished Higher Secondary School Certificate in Science/General stream.",
+      "Finished Higher Secondary School Certificate in Commerce stream.",
       "Secured a strong academic record with an aggregate score of 73.20%."
     ],
     type: "education"
